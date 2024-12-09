@@ -39,8 +39,8 @@ A simple authentication boilerplate using Django, Firebase Authentication, HTML 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/django-firebase-auth.git
-cd django-firebase-auth
+git clone https://github.com/shadabtanjeed/Django-Firebase-User-Authentication-Boilerplate
+cd Django-Firebase-User-Authentication-Boilerplate
 ```
 
 Create virtual environment:
