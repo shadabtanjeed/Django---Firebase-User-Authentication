@@ -2,6 +2,9 @@
 
 A simple authentication boilerplate using Django, Firebase Authentication, HTML and CSS.
 
+## Demo
+
+https://github.com/user-attachments/assets/7d045a1a-c934-404d-a112-62b5e5157825
 
 ## Directory Structure
 ```markdown
@@ -77,6 +80,11 @@ pip install -r requirements.txt
     * Download the service key json file from firebase.
     * Rename it as `serviceAccountKey.json`.
     * Put it in the directory: `django_project`
+
+6. Run the server
+   ```bash
+   python manage.py runserver
+   ```
 
 ## Note
 Due to firebase's limitation, the signup is handled by backend in the function `signup_view` function whereas the login is handled at client side in `login_view` function.
