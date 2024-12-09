@@ -1,6 +1,6 @@
 # **Django + Firebase User Authentication**
 
-A simple authentication boilerplate using Django and Firebase Authentication.
+A simple authentication boilerplate using Django, Firebase Authentication, HTML and CSS.
 
 
 ## Directory Structure
