@@ -87,4 +87,4 @@ pip install -r requirements.txt
    ```
 
 ## Note
-Due to firebase's limitation, the signup is handled by backend in the function `signup_view` function whereas the login is handled at client side in `login_view` function.
+Due to firebase's limitation with python integration, the signup is handled by backend in the function `signup_view` function whereas the login is handled at client side in `login_view` function.
