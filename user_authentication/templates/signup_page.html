@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup Page</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* From Uiverse.io by Yaya12085 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form {
+            background-color: #fff;
+            display: block;
+            padding: 1rem;
+            max-width: 370px;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-title {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 600;
+            text-align: center;
+            color: #000;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-container input,
+        .form button {
+            outline: none;
+            border: 1px solid #e5e7eb;
+            margin: 8px 0;
+        }
+
+        .input-container input {
+            background-color: #fff;
+            padding: 1rem;
+            padding-right: 3rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            width: 300px;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .input-container span {
+            display: grid;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            place-content: center;
+        }
+
+        .input-container span svg {
+            color: #9CA3AF;
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .submit {
+            display: block;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            background-color: #4F46E5;
+            color: #ffffff;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            width: 100%;
+            border-radius: 0.5rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background-color: #423bbd;
+            cursor: pointer;
+        }
+
+        .signup-link {
+            color: #6B7280;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            text-align: center;
+        }
+
+        .signup-link a {
+            text-decoration: underline;
+        }
+
+        /* Toast message styles */
+        .toast {
+            visibility: hidden;
+            width: 400px;
+            height: 150px;
+            margin: auto;
+            background-color: #ffffff;
+            color: #fff;
+            text-align: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            font-size: 17px;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            /* above everything */
+        }
+
+        .toast #desc {
+            color: #000000;
+            padding: 16px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .toast #okBtn {
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 2px;
+        }
+
+        .toast #okBtn:hover {
+            background-color: #423bbd;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* semi-transparent black */
+            z-index: 999;
+            /* under the spinner but above the form */
+        }
+
+        #loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        #loading-spinner svg {
+            width: 3.25em;
+            transform-origin: center;
+            animation: rotate4 2s linear infinite;
+        }
+
+        #loading-spinner circle {
+            fill: none;
+            stroke: #4F46E5;
+            /* Matches your button color */
+            stroke-width: 2;
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            animation: dash4 1.5s ease-in-out infinite;
+        }
+
+        @keyframes rotate4 {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dash4 {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 90, 200;
+                stroke-dashoffset: -35px;
+            }
+
+            100% {
+                stroke-dashoffset: -125px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form class="form" id="signup-form">
+        {% csrf_token %}
+        <p class="form-title">Create a new account</p>
+        <div class="input-container">
+            <input id="username" placeholder="Enter username" type="text" required>
+
+            <span>
+                <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                        stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                </svg>
+            </span>
+
+        </div>
+        <div class="input-container">
+            <input id="password" placeholder="Enter password" type="password" required>
+
+
+            <span>
+                <svg stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2" stroke-linejoin="round"
+                        stroke-linecap="round"></path>
+                    <path
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                </svg>
+            </span>
+        </div>
+        <button class="submit" type="submit">Create Account</button>
+        <p class="signup-link">
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+    </form>
+
+    <div id="overlay" style="display: none;"></div>
+
+    <!-- Add this after the form but before the toast -->
+    <div id="loading-spinner" style="display: none;">
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+    </div>
+
+    <!-- Toast message -->
+    <div id="toast" class="toast">
+        <div id="desc">User created successfully! Please log in.</div>
+        <button id="okBtn">OK</button>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Show overlay and loading spinner
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('loading-spinner').style.display = 'block';
+
+            fetch("{% url 'signup' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ username: username, password: password })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading spinner
+                    document.getElementById('loading-spinner').style.display = 'none';
+
+                    if (data.success) {
+                        showToast(); // Overlay remains for toast
+                    } else {
+                        // Hide overlay on error
+                        document.getElementById('overlay').style.display = 'none';
+                        alert('Error: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    // Hide both overlay and spinner on error
+                    document.getElementById('overlay').style.display = 'none';
+                    document.getElementById('loading-spinner').style.display = 'none';
+                    console.error('Error:', error);
+                });
+        });
+
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.style.visibility = "visible";
+            document.getElementById("okBtn").onclick = function () {
+                // Hide overlay when closing toast
+                document.getElementById('overlay').style.display = 'none';
+                window.location.href = "{% url 'login' %}";
+            };
+        }
+    </script>
+</body>
+
+</html>
