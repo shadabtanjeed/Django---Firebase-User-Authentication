@@ -41,22 +41,21 @@ https://github.com/user-attachments/assets/7d045a1a-c934-404d-a112-62b5e5157825
 ## Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/shadabtanjeed/Django-Firebase-User-Authentication-Boilerplate
-cd Django-Firebase-User-Authentication-Boilerplate
-```
+   ```bash
+   git clone https://github.com/shadabtanjeed/Django-Firebase-User-Authentication-Boilerplate
+   cd Django-Firebase-User-Authentication-Boilerplate
+   ```
 
-Create virtual environment:
-
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-```
+   Create virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
 2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 3. Firebase Setup
     * Go to Firebase Console
@@ -64,6 +63,7 @@ pip install -r requirements.txt
     * Enable Authentication
     * Add web app to get configuration
     * Download service account key
+    * Enable email/password based authentication
 
 4. Environment Configuration
     * Create a `.env` file with the following variables:
@@ -87,4 +87,5 @@ pip install -r requirements.txt
    ```
 
 ## Note
-Due to firebase's limitation with python integration, the signup is handled by backend in the function `signup_view` function whereas the login is handled at client side in `login_view` function.
+   * Due to firebase's limitation with python integration, the signup is handled by backend in the function `signup_view` function whereas the login is handled at client side in `login_view` function.
+   * As the authentication system is based on email identifier, "@email.com" is appended at the end of the username while interating with Firebase.
