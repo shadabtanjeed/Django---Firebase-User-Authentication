@@ -77,7 +77,8 @@ https://github.com/user-attachments/assets/7d045a1a-c934-404d-a112-62b5e5157825
         ```
 
 5. Add `serviceAccountKey.json` file
-    * Download the service key json file from firebase.
+    * Download the service key json file from firebase:
+         * Go to project settings -> Service Accounts -> Generate Private Key
     * Rename it as `serviceAccountKey.json`.
     * Put it in the directory: `django_project`
 
